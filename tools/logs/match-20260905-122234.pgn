@@ -1,0 +1,12 @@
+[Event "Owen vs SF code inspection 1"]
+[Site "?"]
+[Date "2026-09-05"]
+[Round "?"]
+[White "Owen 2"]
+[Black "Stockfish 16"]
+[Result "*"]
+[TimeControl "60+1"]
+[Termination "CRASH Owen 2: engine process died unexpectedly (exit code: -6)"]
+
+1. Nf3 Nf6 *
+
