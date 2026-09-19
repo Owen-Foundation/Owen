@@ -1,0 +1,87 @@
+name: build portable engine binaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      net_url:
+        description: "URL of the .o2nn net to bake into the binaries"
+        default: "https://github.com/Owen-Foundation/Owen/releases/download/v2.1.0/owen2-v14.o2nn"
+        required: false
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x86_64
+            os: ubuntu-22.04
+            tag: linux-x86_64
+            cmake: -DOWEN_NATIVE=OFF
+          - name: linux-arm64
+            os: ubuntu-22.04-arm
+            tag: linux-arm64
+            cmake: -DOWEN_NATIVE=OFF
+          - name: darwin-arm64 (Apple Silicon / M-chip)
+            os: macos-14
+            tag: darwin-arm64
+            cmake: -DOWEN_NATIVE=OFF
+          - name: darwin-x86_64 (Intel Macs)
+            os: macos-15-intel
+            tag: darwin-x86_64
+            cmake: -DOWEN_NATIVE=OFF
+          - name: windows-x86_64
+            os: windows-2022
+            tag: windows-x86_64
+            cmake: -DOWEN_NATIVE=OFF
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: fetch net (bake into binary)
+        shell: bash
+        run: |
+          NET_URL="${{ inputs.net_url }}"
+          if [ -n "$NET_URL" ]; then
+            mkdir -p nets
+            curl -sSL --max-time 300 -o nets/baked.o2nn "$NET_URL" \
+              && ls -la nets/baked.o2nn \
+              || echo "net download failed - building without embedded net"
+          else
+            echo "no net_url input - building without embedded net"
+          fi
+
+      - name: configure
+        shell: bash
+        run: |
+          EXTRA=""
+          if [ -f nets/baked.o2nn ]; then
+            EXTRA="-DOWEN_EMBED_NET=1 -DOWEN_EMBED_NET_PATH=nets/baked.o2nn"
+          fi
+          cmake -B build -DCMAKE_BUILD_TYPE=Release ${{ matrix.cmake }} $EXTRA
+
+      - name: build
+        run: |
+          cmake --build build --target owen2 -j2 --config Release
+
+      - name: package (unix)
+        if: runner.os != 'Windows'
+        run: |
+          mkdir -p dist
+          cp build/owen2 "dist/owen2-${{ matrix.tag }}"
+
+      - name: package (windows)
+        if: runner.os == 'Windows'
+        run: |
+          mkdir dist
+          copy "build\Release\owen2.exe" "dist\owen2-${{ matrix.tag }}.exe"
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: owen2-${{ matrix.tag }}
+          path: dist/*
+          retention-days: 90

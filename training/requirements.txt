@@ -1,8 +1,0 @@
-# Owen Engine © HSR-Projects — training pipeline dependencies
-# For GPU (your RTX 2050): replace the torch line with the CUDA build, e.g.
-#   pip install torch --index-url https://download.pytorch.org/whl/cu124
-torch>=2.2
-python-chess>=1.11
-numpy>=1.26
-pyyaml>=6.0
-tqdm>=4.66
