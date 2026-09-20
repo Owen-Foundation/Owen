@@ -1,18 +1,23 @@
-# Python
-.venv/
+build/
+build-baked/
+build-openbench/
+dist/
 __pycache__/
-*.pyc
-
-# Build artifacts
-engine/owen
-**/*.o
-**/*.cuda_obj.o
-engine/build/
-
-# Large binary assets — fetched separately (see weights/README.md)
-weights/*.pt
-weights/*.nnue
-weights/syzygy/
-
-# Logs / scratch
+*.o2nn
+!nets/.gitkeep
+data/
+*.bin
+*.pt
+.venv/
 *.log
+.DS_Store
+gui/target/
+gui/Cargo.lock
+
+# android engine-APK build outputs
+android/build/
+android/jniLibs/
+android/gen/
+android/classes/
+android/out/
+android/stage/

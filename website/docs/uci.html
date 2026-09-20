@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UCI reference — Owen 2 docs</title>
+  <meta name="description" content="Complete Owen 2 UCI protocol reference: commands, options and output lines." />
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html" aria-label="Owen 2 home">
+        <img src="../assets/logo.svg" width="36" height="36" alt="" />
+        <span class="brand-name">OWEN<span class="brand-two">2</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#download">Download</a>
+        <a href="../index.html#testing">Testing</a>
+        <a href="index.html">Docs</a>
+        <a href="../index.html#community">Community</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme" id="themeToggle">
+          <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a class="btn btn-ghost" href="https://github.com/Owen-Foundation/Owen" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap doc-layout">
+      <aside class="doc-side">
+        <strong>Documentation</strong>
+        <a href="index.html">Overview</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="uci.html" class="active">UCI reference</a>
+        <a href="nets.html">Network format</a>
+        <a href="training.html">Training pipeline</a>
+        <a href="types.html">Types &amp; glossary</a>
+        <a href="api.html">Worker API reference</a>
+      </aside>
+
+      <article class="doc-article">
+        <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Documentation</a> / UCI reference</p>
+        <p class="eyebrow">Protocol</p>
+        <h1>UCI reference</h1>
+        <p class="section-sub">Owen speaks standard UCI. Anything here works in Cutechess, Knights, Arena and OpenBench.</p>
+
+        <h2>Minimal session</h2>
+        <pre><code>$ ./owen2
+o2 &gt; uci
+id name Owen 2
+id author Owen Foundation
+option name Hash type spin default 64 min 1 max 16384
+...
+uciok
+o2 &gt; isready
+readyok
+o2 &gt; position startpos moves e2e4 e7e5
+o2 &gt; setoption name Threads value 8
+o2 &gt; go depth 22
+info depth 19 seldepth 19 score cp 5 nodes 12000 nps 34582 time 347 pv b1c3
+bestmove b1c3 ponder a7a6</code></pre>
+
+        <h2>Commands</h2>
+        <table>
+          <tr><th>Command</th><th>Meaning</th></tr>
+          <tr><td><code>uci</code></td><td>Identify; lists <code>id</code> and all <code>option</code> lines, ends with <code>uciok</code>.</td></tr>
+          <tr><td><code>isready</code></td><td>Synchronize; always answered with <code>readyok</code>.</td></tr>
+          <tr><td><code>ucinewgame</code></td><td>Reset board, clear search state, start a new game.</td></tr>
+          <tr><td><code>position startpos [moves ...]</code></td><td>Set from the initial position plus a move list.</td></tr>
+          <tr><td><code>position fen &lt;fen&gt; [moves ...]</code></td><td>Set from any FEN plus a move list.</td></tr>
+          <tr><td><code>setoption name &lt;n&gt; value &lt;v&gt;</code></td><td>Change an option (see table below).</td></tr>
+          <tr><td><code>go depth N</code></td><td>Search with a visit budget mapped from N (4 ≈ 12k visits).</td></tr>
+          <tr><td><code>go movetime MS</code></td><td>Hard time limit in milliseconds.</td></tr>
+          <tr><td><code>go wtime WT btime BT [winc WI binc BI]</code></td><td>Clock game; time is split with overhead guards.</td></tr>
+          <tr><td><code>go infinite</code> / <code>go ponder</code></td><td>Search until <code>stop</code> / <code>ponderhit</code>.</td></tr>
+          <tr><td><code>go nodes N</code> / <code>go mate N</code></td><td>Stop after N visits / on forced mate proof.</td></tr>
+          <tr><td><code>stop</code></td><td>End the search now and emit <code>bestmove</code>.</td></tr>
+          <tr><td><code>ponderhit</code></td><td>The ponder move was played; convert ponder to normal search.</td></tr>
+          <tr><td><code>d</code> / <code>display</code></td><td>Print the current board/FEN (debugging).</td></tr>
+          <tr><td><code>perft [n]</code></td><td>Move-generation verification counts.</td></tr>
+          <tr><td><code>bench [depth]</code></td><td>Deterministic startpos bench to stdout (see below).</td></tr>
+          <tr><td><code>quit</code></td><td>Stop everything and exit.</td></tr>
+        </table>
+
+        <h2>Options (core set; <code>uci</code> lists all)</h2>
+        <table>
+          <tr><th>Name</th><th>Type</th><th>Default</th><th>Notes</th></tr>
+          <tr><td><code>Hash</code></td><td>spin 1–16384</td><td><code>64</code></td><td>Transposition table, MB.</td></tr>
+          <tr><td><code>Threads</code></td><td>spin 1–512</td><td><code>1</code></td><td>Lazy SMP search trees.</td></tr>
+          <tr><td><code>NNUEFile</code></td><td>string</td><td><code>nets/o2-v1.o2nn</code></td><td>Network path; ignored when a net is baked in.</td></tr>
+          <tr><td><code>MTS_C</code></td><td>string</td><td><code>1.35</code></td><td>UCB exploration constant.</td></tr>
+          <tr><td><code>MTS_MultiPV</code></td><td>spin</td><td><code>1</code></td><td>Principal variations kept alive.</td></tr>
+          <tr><td><code>Slow Mover</code></td><td>spin 10–1000</td><td><code>100</code></td><td>Clock-spending scale, percent.</td></tr>
+          <tr><td><code>UCI_Elo</code> / <code>UCI_LimitStrength</code></td><td>spin / check</td><td><code>1320</code> / off</td><td>Honest strength limiter via visit caps.</td></tr>
+          <tr><td><code>Ponder</code> / <code>UCI_Chess960</code></td><td>check</td><td>off</td><td>Standard toggles.</td></tr>
+          <tr><td><code>Bound Prune</code> / <code>Best First</code></td><td>check</td><td>off</td><td>Experimental search switches; leave off unless testing.</td></tr>
+          <tr><td><code>Clear Hash</code></td><td>button</td><td>—</td><td>Drop tables and caches.</td></tr>
+          <tr><td><code>Debug Log File</code></td><td>string</td><td>empty</td><td>Optional debug log path.</td></tr>
+        </table>
+
+        <h2>Output anatomy</h2>
+        <pre><code>info depth 19 seldepth 19 score cp 5 nodes 12000 nps 34582 time 347 pv b1c3
+bestmove b1c3 ponder a7a6</code></pre>
+        <ul>
+          <li><strong>depth</strong> is the maximum tree depth reached; <strong>seldepth</strong> tracks it too (best-first search has no classic iterations).</li>
+          <li><strong>score</strong> is side-to-move centipawns, or <code>mate N</code> for proven mates.</li>
+          <li><strong>nodes/nps/time</strong> are visits, visits-per-second and milliseconds.</li>
+          <li><strong>bestmove</strong> is always emitted exactly once; <code>0000</code> means no legal moves.</li>
+        </ul>
+
+        <h2>Bench (deterministic)</h2>
+        <pre><code>$ ./owen2 bench 6
+bench depth 6 nodes 32000 nps 1127 time 28383ms bestmove e2e4 evalhit 26.5%</code></pre>
+        <p>
+          One stdout line, depth clamped to 1–10. Node counts are identical on
+          every machine for the same binary — DefenceTest uses them as run
+          signatures to prove workers built the right engine.
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <img src="../assets/logo.svg" width="32" height="32" alt="" />
+        <div><strong>Owen 2</strong><span>Open-source chess engine · GPL-3.0</span></div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="https://github.com/Owen-Foundation/Owen" target="_blank" rel="noopener">Engine</a>
+        <a href="index.html">Docs index</a>
+        <a href="../index.html">Back to home</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

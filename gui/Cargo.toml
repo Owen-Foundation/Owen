@@ -1,0 +1,15 @@
+[package]
+name = "owen-gui"
+version = "0.1.0"
+edition = "2021"
+description = "Owen 2 — world-class Rust GUI with Lichess cburnett pieces + black console"
+
+[dependencies]
+eframe = { version = "0.28", features = ["default"] }
+egui = "0.28"
+egui_extras = { version = "0.28", features = ["image"] }
+rfd = "0.14"
+chess = "3.2"
+resvg = "0.44"
+usvg = "0.44"
+tiny-skia = "0.11"

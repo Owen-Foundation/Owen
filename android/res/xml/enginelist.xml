@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<enginelist>
+    <engine
+        name="Owen 2"
+        filename="libowen.so"
+        target="arm64-v8a|armeabi-v7a|x86_64" />
+</enginelist>

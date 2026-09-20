@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owen 2 — Open-Source Chess Engine</title>
+  <meta name="description" content="Owen 2 is a from-scratch, open-source UCI chess engine built on NNUE evaluation and Marrow Tree Search — a best-first alternative to alpha-beta. GPL-3.0." />
+  <meta name="theme-color" content="#0b0b0f" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <link rel="apple-touch-icon" href="assets/owen.png" />
+  <meta property="og:title" content="Owen 2 — Open-Source Chess Engine" />
+  <meta property="og:description" content="From-scratch UCI engine: NNUE evaluation + Marrow Tree Search. Free software under GPL-3.0." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/owen.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Owen 2 home">
+        <img src="assets/logo.svg" width="36" height="36" alt="" />
+        <span class="brand-name">OWEN<span class="brand-two">2</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+        <a href="#testing">Testing</a>
+        <a href="docs/">Docs</a>
+        <a href="#community">Community</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme" id="themeToggle">
+          <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a class="btn btn-ghost" href="https://github.com/Owen-Foundation/Owen" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.6 2.9 8.4 6.9 9.8.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.3 10.3 0 0 0 22 12.3C22 6.6 17.5 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Open source · GPL-3.0 · UCI</p>
+          <h1>A chess engine built<br /><span class="grad">from first principles.</span></h1>
+          <p class="lede">
+            Owen 2 pairs an original <strong>NNUE</strong> evaluation with
+            <strong>Marrow Tree Search</strong> — a best-first, proof-guided alternative to
+            alpha-beta. No borrowed code. No shortcuts. Just a clean engine you can read,
+            train, and run on any machine.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#download">Download</a>
+            <a class="btn btn-ghost" href="#docs">Read the docs</a>
+          </div>
+          <ul class="chips" aria-label="Highlights">
+            <li>NNUE · HalfKP + Threat</li>
+            <li>Best-first search</li>
+            <li>Windows · Linux · macOS · Android · ARM</li>
+          </ul>
+        </div>
+
+        <div class="terminal" role="img" aria-label="Example UCI session">
+          <div class="terminal-bar"><span></span><span></span><span></span><em>owen2</em></div>
+          <pre><code><span class="t-prompt">$</span> ./owen2
+<span class="t-out">o2 &gt; uci</span>
+id name Owen 2
+id author Owen Foundation
+option name Hash type spin default 64
+option name NNUEFile type string default nets/o2-v1.o2nn
+option name MTS_C type string default 1.35
+uciok
+<span class="t-out">o2 &gt; setoption name Threads value 8</span>
+<span class="t-out">o2 &gt; go depth 22</span>
+info depth 31 seldepth 31 score cp 12 nodes 1483921 nps 1124005 time 1319 pv e2e4
+bestmove e2e4 ponder c7c5</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="strip" aria-label="At a glance">
+      <div class="wrap strip-inner">
+        <div><strong>From scratch</strong><span>Every line original</span></div>
+        <div><strong>NNUE</strong><span>HalfKP + Threat</span></div>
+        <div><strong>Marrow Tree</strong><span>Best-first search</span></div>
+        <div><strong>Portable</strong><span>5 platforms · 7 binaries</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Why Owen</p>
+          <h2>Different by design</h2>
+          <p class="section-sub">
+            Modern engines proved that NNUE evaluation plus excellent engineering wins. Owen keeps the
+            lesson and replaces the search itself.
+          </p>
+        </header>
+        <div class="grid">
+          <article class="card">
+            <div class="ico">◎</div>
+            <h3>Marrow Tree Search</h3>
+            <p>A best-first, proof-guided tree search with UCB1 selection and NNUE leaves. Depth is
+              allocated by uncertainty, not a fixed reduction schedule.</p>
+          </article>
+          <article class="card">
+            <div class="ico">▦</div>
+            <h3>Original NNUE</h3>
+            <p>HalfKP + Threat feature transformer feeding affine layers, trained end-to-end from
+              self-play data. Weights ship as versioned <code>.o2nn</code> files.</p>
+          </article>
+          <article class="card">
+            <div class="ico">∅</div>
+            <h3>No alpha-beta baggage</h3>
+            <p>No null-move pruning, no fragile late-move reductions, no razor/futility heuristics —
+              and nothing derived from other engines' sources.</p>
+          </article>
+          <article class="card">
+            <div class="ico">⌘</div>
+            <h3>Readable core</h3>
+            <p>Bitboards, magic move generation, Zobrist hashing and a clean UCI loop. Small enough
+              to audit, fast enough to matter.</p>
+          </article>
+          <article class="card">
+            <div class="ico">⇅</div>
+            <h3>Train your own net</h3>
+            <p>A Python/PyTorch trainer turns self-play samples into a network. Distillation recipes
+              for stronger teachers are documented too.</p>
+          </article>
+          <article class="card">
+            <div class="ico">⬡</div>
+            <h3>Runs anywhere</h3>
+            <p>Prebuilt binaries for Windows, Linux, macOS and ARM, plus an OpenBench-compatible
+              Makefile that embeds the network at build time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="architecture">
+      <div class="wrap two-col">
+        <div>
+          <p class="eyebrow">Architecture</p>
+          <h2>Small surface, clear seams</h2>
+          <p class="section-sub">
+            The engine is organised so each concern lives in one place — board state, move
+            generation, evaluation, and search stay independent and testable.
+          </p>
+          <ul class="checks">
+            <li>Perft-verified move generation (Kiwipete 97862)</li>
+            <li>Threaded search with a sharded transposition table</li>
+            <li>UCI options for hash, threads, network and exploration</li>
+          </ul>
+          <a class="link-arrow" href="https://github.com/Owen-Foundation/Owen/blob/master/docs/mts.md" target="_blank" rel="noopener">Read the MTS specification →</a>
+        </div>
+        <div class="tree-card">
+          <div class="terminal-bar"><span></span><span></span><span></span><em>src/</em></div>
+          <pre><code>src/
+  types.h, bitboard.h/.cpp   attack tables, magic bitboards
+  position.h/.cpp            board state, make/unmake, Zobrist
+  movegen.h/.cpp             pseudo-legal + legal generation, perft
+  nnue/                      HalfKP feature transformer + affine layers
+  search/                    Marrow Tree Search (select / expand / backup)
+  uci.h/.cpp                 UCI loop and options
+trainer/                     PyTorch trainer: sdata → .o2nn
+tests/                       perft, see, eval, search correctness</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="download">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Download</p>
+          <h2>Run Owen 2 today</h2>
+          <p class="section-sub">Grab a prebuilt binary or build from source in under a minute.</p>
+        </header>
+        <div class="download-grid">
+          <a class="dl-card" href="https://github.com/Owen-Foundation/Owen/releases/tag/v2.1.0" target="_blank" rel="noopener">
+            <div class="dl-os">Windows</div>
+            <div class="dl-meta">x86-64</div>
+            <span class="dl-go">Download →</span>
+          </a>
+          <a class="dl-card" href="https://github.com/Owen-Foundation/Owen/releases/tag/v2.1.0" target="_blank" rel="noopener">
+            <div class="dl-os">Linux</div>
+            <div class="dl-meta">x86-64 · arm64</div>
+            <span class="dl-go">Download →</span>
+          </a>
+          <a class="dl-card" href="https://github.com/Owen-Foundation/Owen/releases/tag/v2.1.0" target="_blank" rel="noopener">
+            <div class="dl-os">macOS</div>
+            <div class="dl-meta">Apple silicon · Intel</div>
+            <span class="dl-go">Download →</span>
+          </a>
+          <a class="dl-card" href="https://github.com/Owen-Foundation/Owen/releases/download/v2.1.0/owen2-engine.apk">
+            <div class="dl-os">Android</div>
+            <div class="dl-meta">arm64 · DroidFish-ready APK</div>
+            <span class="dl-go">Download →</span>
+          </a>
+          <a class="dl-card" href="https://github.com/Owen-Foundation/Owen" target="_blank" rel="noopener">
+            <div class="dl-os">Source</div>
+            <div class="dl-meta">GPL-3.0</div>
+            <span class="dl-go">View repo →</span>
+          </a>
+        </div>
+        <p class="note" style="border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);">
+          Every binary above ships with the <strong>v14 network baked in</strong> (no separate download needed).
+          Standalone net for developers: <a class="link-arrow" href="https://github.com/Owen-Foundation/Owen/releases/download/v2.1.0/owen2-v14.o2nn">owen2-v14.o2nn</a>
+          (sha256 <code>ebdbc500e975…</code>). Reference bench: <code>bench 6 → 32000 nodes, bestmove e2e4</code>.
+          Android: install the APK, then pick <strong>Owen 2</strong> in DroidFish under Manage Chess Engines.
+        </p>
+        <div class="code-card">
+          <div class="code-head">
+            <span>Build from source</span>
+            <button class="copy" type="button" data-copy="cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j
+./build/owen2">Copy</button>
+          </div>
+          <pre><code>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j
+./build/owen2</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="testing">
+      <div class="wrap two-col">
+        <div>
+          <p class="eyebrow">Community testing</p>
+          <h2>Powered by DefenceTest</h2>
+          <p class="section-sub">
+            Owen's strength comes from thousands of self-play and match games. DefenceTest is the
+            open distributed test framework that runs those games — and it needs volunteers.
+          </p>
+          <ul class="checks">
+            <li>Accounts approved instantly — contribute in minutes, not days</li>
+            <li>Automatic updates, native Windows/Linux/macOS workers</li>
+            <li>Results stream straight back to the project — no manual uploads</li>
+          </ul>
+          <div class="cta">
+            <a class="btn btn-primary" id="dtLink" href="https://zoloft-roland-playstation-motorcycles.trycloudflare.com" target="_blank" rel="noopener">Open the test server</a>
+            <a class="btn btn-ghost" href="https://github.com/Owen-Foundation/DefenceTest" target="_blank" rel="noopener">How it works</a>
+          </div>
+        </div>
+        <div class="code-card">
+          <div class="code-head">
+            <span>Run a worker</span>
+            <button class="copy" type="button" data-copy="python worker.py USERNAME PASSWORD --host zoloft-roland-playstation-motorcycles.trycloudflare.com --port 443">Copy</button>
+          </div>
+          <pre><code><span class="c"># 1. create an account (auto-approved): open the test server above, /signup</span>
+<span class="c"># 2. get the worker: git clone https://github.com/Owen-Foundation/DefenceTest</span>
+<span class="c"># 3. run it with YOUR account + the full --host (no GPU needed, https/443)</span>
+python worker.py USERNAME PASSWORD --host zoloft-roland-playstation-motorcycles.trycloudflare.com --port 443
+<span class="c"># needs: python3.8+, C++ compiler, make, cmake. Omit --host only for a local server.</span></code></pre>
+          <p class="note">
+            Games are played by your worker and submitted automatically; the server aggregates
+            W/D/L, Elo and SPRT statistics for every patch.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="docs">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Documentation</p>
+          <h2>Everything in the open</h2>
+          <p class="section-sub">Full guides on this site, plus the repo for source-level docs.</p>
+        </header>
+        <div class="grid docs-grid">
+          <a class="doc" href="docs/how-it-works.html"><h3>How it works</h3><p>Board, moves, NNUE and Marrow Tree Search.</p></a>
+          <a class="doc" href="docs/uci.html"><h3>UCI reference</h3><p>Commands, options and output lines.</p></a>
+          <a class="doc" href="docs/api.html"><h3>Worker API</h3><p>Interactive Scalar reference for the test API.</p></a>
+          <a class="doc" href="docs/"><h3>All docs →</h3><p>Nets, training, types and the full index.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="community">
+      <div class="wrap">
+        <div class="community">
+          <div>
+            <h2>Get involved</h2>
+            <p class="section-sub">
+              Owen is free software built in the open. Report bugs, contribute code, train a
+              network, or lend your CPU to the test queue — every contribution sharpens the engine.
+            </p>
+          </div>
+          <div class="cta">
+            <a class="btn btn-primary" href="https://github.com/Owen-Foundation/Owen" target="_blank" rel="noopener">Star on GitHub</a>
+            <a class="btn btn-ghost" href="https://github.com/Owen-Foundation/Owen/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing guide</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" width="32" height="32" alt="" />
+        <div>
+          <strong>Owen 2</strong>
+          <span>Open-source chess engine · GPL-3.0</span>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="https://github.com/Owen-Foundation/Owen" target="_blank" rel="noopener">Engine</a>
+        <a href="https://github.com/Owen-Foundation/DefenceTest" target="_blank" rel="noopener">DefenceTest</a>
+        <a href="https://github.com/Owen-Foundation/Owen/blob/master/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="#top">Back to top ↑</a>
+      </nav>
+      <p class="footer-fine">
+        No third-party engine source is included or derived from. NNUE and related techniques follow public
+        research from the computer-chess community.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

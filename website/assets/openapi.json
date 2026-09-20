@@ -1,0 +1,580 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DefenceTest Worker API",
+    "version": "329",
+    "description": "Machine API used by DefenceTest workers to fetch tasks, submit game results and upload PGNs. Same-origin reference snapshot."
+  },
+  "paths": {
+    "/api/request_task": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Request Task",
+        "operationId": "api_request_task_api_request_task_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/update_task": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Update Task",
+        "operationId": "api_update_task_api_update_task_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/failed_task": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Failed Task",
+        "operationId": "api_failed_task_api_failed_task_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/stop_run": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Stop Run",
+        "operationId": "api_stop_run_api_stop_run_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/request_version": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Request Version",
+        "operationId": "api_request_version_api_request_version_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/beat": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Beat",
+        "operationId": "api_beat_api_beat_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/request_spsa": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Request Spsa",
+        "operationId": "api_request_spsa_api_request_spsa_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/worker_log": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Worker Log",
+        "operationId": "api_worker_log_api_worker_log_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/upload_pgn": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Upload Pgn",
+        "operationId": "api_upload_pgn_api_upload_pgn_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rate_limit": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Rate Limit",
+        "operationId": "api_rate_limit_api_rate_limit_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/active_runs": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Active Runs",
+        "operationId": "api_active_runs_api_active_runs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/finished_runs": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Finished Runs",
+        "operationId": "api_finished_runs_api_finished_runs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/actions": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Actions",
+        "operationId": "api_actions_api_actions_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get_run/{id}": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Get Run",
+        "operationId": "api_get_run_api_get_run__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get_task/{id}/{task_id}": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Get Task",
+        "operationId": "api_get_task_api_get_task__id___task_id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id"
+            }
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Task Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get_elo/{id}": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Get Elo",
+        "operationId": "api_get_elo_api_get_elo__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/calc_elo": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Calc Elo",
+        "operationId": "api_calc_elo_api_calc_elo_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pgn/{id}": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Download Pgn",
+        "operationId": "api_download_pgn_api_pgn__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/run_pgns/{id}": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Download Run Pgns",
+        "operationId": "api_download_run_pgns_api_run_pgns__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/nn/{id}": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "Api Download Nn",
+        "operationId": "api_download_nn_api_nn__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ]
+}
